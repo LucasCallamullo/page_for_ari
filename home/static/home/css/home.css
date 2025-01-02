@@ -16,9 +16,9 @@
 
 .calendar-container {
   position: relative;
-  width: 92%;  /* Aumenté el tamaño para mayor visibilidad */
+  width: 85%;  /* Aumenté el tamaño para mayor visibilidad */
   margin: 0 auto;
-  max-width: 800px;  /* Añadí un máximo para evitar que se expanda demasiado */
+  max-width: 750px;  /* Añadí un máximo para evitar que se expanda demasiado */
   overflow: hidden;  /* Para evitar que los bordes sobresalgan */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);  /* Sombra más suave */
 }
