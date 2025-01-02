@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$9gt&d(h^j8af!8dgp=x&#s15p7@r=y+geg%+r-*4k95oedy2b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # PAra desplegar en produccion
+    'whitenoise.runserver_nostatic', 
+    
     'home',
     'users',
     'gustos',
@@ -164,5 +168,5 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Permite todos los dominios (en producción, puedes especificar solo el dominio de Railway)
-ALLOWED_HOSTS = ['localhost', 'web-production-8df2.up.railway.app']
+# ALLOWED_HOSTS = ['localhost', 'web-production-8df2.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://web-production-8df2.up.railway.app', 'http://localhost']
