@@ -1,0 +1,101 @@
+
+
+
+
+{% extends "home/base.html" %}
+
+{% load static %}
+
+<!-- For More CSS Modules -->
+{% block extra_head %}
+    <!-- Cargar CSS o meta tags específicos de la página aquí -->
+    <link href="{% static 'users/css/profile.css' %}" rel="stylesheet">
+    
+{% endblock %}
+
+
+<!-- =================================================================
+                            Contenido Cambianteee 
+================================================================= -->
+{% block content %}
+    
+    <!-- Profile n Banner -->
+    <div class="profile-banner d-flex align-items-center">
+        <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture">
+    </div>
+    <div class="profile-content">
+        <h1 class="fw-bold">John Doe</h1>
+        <p class="text-muted">Web Developer | Designer | Content Creator</p>
+    </div>
+
+
+    <div class="container mt-5">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" 
+                    data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" 
+                    aria-selected="true"> 
+                    <i class="fa-solid fa-heart"></i> <span> Gustos </span> 
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" 
+                    type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                    <i class="fa-solid fa-camera"></i> <span> Dibujos </span> 
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" 
+                    type="button" role="tab" aria-controls="tab3" aria-selected="false">
+                    <i class="fa-solid fa-comment-dots"></i> <span> Comments </span> 
+                </button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab4-tab" data-bs-toggle="tab" data-bs-target="#tab4" 
+                    type="button" role="tab" aria-controls="tab4" aria-selected="false">
+                    <i class="fa-solid fa-bookmark"></i> <span> Saved </span>
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                {% include 'users/tab1_tastes.html' %}
+            </div>
+
+            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                <div class="tab-content-inner">
+                    {% include 'users/tab2_draws.html' %}
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                {% include 'users/tab3_comments.html' %}
+            </div>
+
+            <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+                <h3>Content for Tab 4</h3>
+                <p>This is where you will replace content for Tab 4.</p>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+<!-- ==================================================================
+#                  Mis Scripts personalizados
+===================================================================== -->
+{% block extra_scripts %}
+
+    <script src="{% static 'home/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+{% endblock %}

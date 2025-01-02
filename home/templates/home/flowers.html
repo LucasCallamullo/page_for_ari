@@ -1,0 +1,74 @@
+
+
+{% extends "home/base.html" %}
+
+{% load static %}
+
+<!-- For More CSS Modules -->
+{% block extra_head %}
+
+
+
+    <!-- Cargar CSS o meta tags específicos de la página aquí -->
+    <link href="{% static 'home/css/flowers.css' %}" rel="stylesheet">
+
+
+{% endblock %}
+
+<!-- Contenido específico del HEADER de la página -->
+
+
+<!-- =================================================================
+                            Contenido Cambianteee 
+================================================================= -->
+{% block content %}
+
+
+    <canvas id="birthday"></canvas>
+
+
+    <div class="card">
+        <div class="imgBox">
+            <div class="bark"></div>
+            <img src="{% static 'img/snoopy-birthday2.jpg' %}">
+        </div>
+        <div class="details">
+            <h4 class="color1">Feliz Cumple Princesa</h2>
+
+            <!--<h4 class="color2 margin">(HAPPY BIRTHDAY)</h3> -->  
+
+            <!-- Carta Stuff -->
+            <p>Querida Ari:</p>
+            <p>Primero que nada Feliz Cum!</p>
+            <p>y que la pases hermoso en tu día.</p>
+            <p>Te quiero mucho Ari.</p>
+            <p>Te quiero en todo este 2025.</p>
+            <p>Te quiero para crecer juntos.</p>
+            <p>Te quiero en todos los sentidos.</p>
+            <p class="text-right">Feliz Cumple!</p>
+            <p class="text-right">♥ Ari</p>
+
+            <button class="btn-profile" onclick="window.location.href='{% url 'Profile' %}';">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    
+
+
+{% endblock %}
+
+
+<!-- ==================================================================
+#                  Mis Scripts personalizados
+===================================================================== -->
+
+{% block extra_scripts %}
+
+    <script src="{% static 'home/js/flowers.js' %}"></script>
+
+{% endblock %}

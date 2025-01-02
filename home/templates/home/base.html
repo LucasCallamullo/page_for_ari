@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    {% load static %}
+
+    <!-- Preconnect and Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Fonts - Para mostrar algunos iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+
+    <!-- Bootstrap 5.3.3 -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Styles propios de cada template -->
+    <link href="{% static 'home/css/base.css' %}" rel="stylesheet"> 
+    
+    <!-- For More CSS Modules -->
+    {% block extra_head %}
+        <!-- Cargar CSS o meta tags específicos de la página aquí -->
+    {% endblock %}
+
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <!-- Botón de la izquierda -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <!-- Contenido del Navbar -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Izquierda -->
+                    <ul class="navbar-nav me-auto px-5">
+                        <li class="nav-item">
+                            <button id="button1" class="nav-button">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </li>
+                    </ul>
+            
+                    <!-- Derecha -->
+                    <ul class="navbar-nav ms-auto px-5">
+                        <li class="nav-item menu-item">
+                            <a class="nav-link menu-item-inner" href="#">
+                                <i class="uil uil-home"></i> 
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link menu-item-inner" href="#">
+                                <i class="uil uil-comment-image"></i> 
+                                Forum
+                            </a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link menu-item-inner" href="#">
+                                <i class="uil uil-shopping-bag"></i> 
+                                Store
+                            </a>
+                        </li>
+                        <li class="nav-item menu-item">
+                            <a class="nav-link menu-item-inner" href="#">
+                                <i class="uil uil-user"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Menú Desplegable -->
+        <div class="container-fluid bg-dark" id="menu">
+            <div class="row">
+                <!-- Columna Izquierda -->
+                <div class="col-md-4 px-5">
+                    <h3 class="mt-5">General</h3>
+                    <ul class="list-unstyled menu-items">
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class='uil uil-home'></i> Home</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class='uil uil-comment-image'></i> Forum</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-shopping-bag"></i> Store</a></li>
+                    </ul>
+                </div>
+            
+                <!-- Columna Central -->
+                <div class="col-md-4 px-5">
+                    <h3 class="mt-5">Useful Links</h3>
+                    <ul class="list-unstyled menu-items">
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-bookmark"></i> Tutorials</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-map-marker-info"></i> Dynmap</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class='uil uil-server-alt'></i> Servers</a></li>
+                    </ul>
+                </div>
+            
+                <!-- Columna Derecha -->
+                <div class="col-md-4 px-5">
+                    <h3 class="mt-5">Admin Tools</h3>
+                    <ul class="list-unstyled menu-items">
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-lightbulb"></i> Control Panel</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-brackets-curly"></i> Code Editor</a></li>
+                        <li class="menu-item"><a class="menu-item-inner" href="#"><i class="uil uil-window"></i> Info & Status</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="back-to-top">
+            <a href="#" class="semplice-event" data-event-type="helper" data-event="scrollToTop">
+                <i class="fas fa-arrow-up"></i> <!-- Font Awesome up arrow icon -->
+            </a>
+        </div>
+
+    </header>
+    
+    <!-- Contenido Cambiante -->
+    <main>
+        {% block content %}
+            <!-- Contenido específico de la página -->
+        {% endblock %}
+    </main>
+
+
+    <!-- FOOTER -->       
+    <footer id="footer" class="footer">
+        <div class="footer-logo-wrapper">
+            <!-- Usando la etiqueta <img> para cargar el SVG estático -->
+            <img class="footer-logo" src="{% static 'img/snoopy-love.svg' %}" alt="Logo">
+        </div>
+    
+        <div class="footer-inner">
+            <div class="footer-left">
+                <!-- Usando la etiqueta <img> para cargar el SVG estático -->
+                <img class="footer-ico" src="{% static 'img/snoopy-love.svg' %}" alt="Icon">
+                <a class="footer-mail">Find us everywhere.</a>
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a class="footer-link" href="#" target="_blank">YouTube.</a>
+                    <a class="footer-link" href="#" target="_blank">Twitter.</a>
+                    <a class="footer-link" href="#" target="_blank">Instagram.</a>
+                    <a class="footer-link" href="#" target="_blank">Discord.</a>
+                </div>
+                <div class="footer-text">   
+                    <p>Made with ♥ by Lucas for Ariana</p>
+                    <p>© All rights reserved.</p>
+                </div>
+
+                <div class="footer-sites">
+                    <a>Cookie Policy.</a> | <a href="#" target="_blank">Unsplash.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Bootstrap Scripts 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    
+    <script src="{ % static 'bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' % }"></script> -->
+    
+    <!-- ==================================================================
+    #                  Mis Scripts personalizados
+    ===================================================================== -->
+    <script src="{% static 'home/js/base.js' %}"></script>
+
+
+    {% block extra_scripts %}
+    <!-- Cargas archivos .js propios de cada template/vista
+    - Por ahora solo se usa en producto_base.html
+    -->
+    {% endblock %}
+
+</body>
+</html>

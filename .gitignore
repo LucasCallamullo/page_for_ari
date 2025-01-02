@@ -1,0 +1,19 @@
+# Ignorar el entorno virtual
+venv/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Migraciones
+*/migrations/
+
+# Ignorar mi carpeta de steps
+z_steps/
+
+# Ignorar mi carpeta de pruebas
+z_proofs/
+
+staticfiles
+
+db.sqlite3

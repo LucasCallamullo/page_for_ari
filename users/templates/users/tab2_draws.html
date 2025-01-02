@@ -1,0 +1,126 @@
+
+
+
+
+<article class="gallery">
+    <img src="https://assets.codepen.io/1506195/unsplash-music-0.avif" 
+        alt="Guitar player at concert" 
+        class="gallery-img" 
+        data-bs-toggle="modal" 
+        data-bs-target="#imageModal" 
+        data-title="Guitar Player at Concert" />
+
+    <img src="https://assets.codepen.io/1506195/unsplash-music-1.avif" 
+        alt="duo singing" 
+        class="gallery-img" 
+        data-bs-toggle="modal" 
+        data-bs-target="#imageModal" 
+        data-title="duo singing" />
+    
+    <img src="https://assets.codepen.io/1506195/unsplash-music-2.avif" 
+        alt="crowd cheering" 
+        class="gallery-img" 
+        data-bs-toggle="modal" 
+        data-bs-target="#imageModal" 
+        data-title="crowd cheering" />
+
+    <img src="https://assets.codepen.io/1506195/unsplash-music-3.avif" 
+        alt="Guitar player at concert" 
+        class="gallery-img" 
+        data-bs-toggle="modal" 
+        data-bs-target="#imageModal" 
+        data-title="singer performing" />
+
+
+
+    <img src="https://assets.codepen.io/1506195/unsplash-music-0.avif" alt="guitar player at concert" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-1.avif" alt="duo singing" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-2.avif" alt="crowd cheering" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-3.avif" alt="singer performing" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-4.avif" alt="singer fistbumping crowd" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-5.avif" alt="man with a guitar singing" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-6.avif" alt="crowd looking at a lighted stage" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+    <img src="https://assets.codepen.io/1506195/unsplash-music-7.avif" alt="woman singing on stage" class="gallery-img" data-bs-toggle="modal" data-bs-target="#imageModal" />
+</article>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-zoom-container">
+                    <img id="modalImage" src="" alt="Expanded Image" class="img-fluid modal-img" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_scripts %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Asignar la imagen al modal al hacer clic en una imagen de la galería
+            const galleryImages = document.querySelectorAll('.gallery-img');
+            const modalTitle = document.getElementById('imageModalLabel');
+            const modalImage = document.getElementById('modalImage');
+            const zoomContainer = document.querySelector('.modal-zoom-container');
+            
+            let zoomEnabled = false; // Bandera para activar/desactivar el zoom
+        
+            galleryImages.forEach(image => {
+                image.addEventListener('click', function () {
+                    const imageUrl = this.src;
+                    const imageTitle = this.getAttribute('data-title') || this.alt; // Usa data-title o alt como título
+
+                    // Asignar la URL y el título al modal
+                    modalImage.src = imageUrl;
+                    zoomEnabled = false; // Restablecer el estado de zoom al abrir el modal
+                    modalImage.style.transform = 'scale(1)'; // Restablecer el zoom inicial
+
+                    modalTitle.textContent = imageTitle;
+                });
+            });
+
+            if (zoomContainer && modalImage) {
+                // Evento para activar/desactivar el zoom al hacer clic
+                zoomContainer.addEventListener('click', () => {
+                    zoomEnabled = !zoomEnabled; // Alternar entre activado/desactivado
+                    zoomContainer.style.cursor = zoomEnabled ? 'zoom-out' : 'zoom-in';
+                    if (!zoomEnabled) {
+                        modalImage.style.transform = 'scale(1)'; // Restablecer el zoom al desactivarlo
+                    }
+                });
+        
+                // Manejar el efecto de zoom al mover el mouse si está activado
+                zoomContainer.addEventListener('mousemove', (e) => {
+                    if (zoomEnabled) {
+                        const rect = zoomContainer.getBoundingClientRect();
+                        const offsetX = ((e.clientX - rect.left) / rect.width) * 100;
+                        const offsetY = ((e.clientY - rect.top) / rect.height) * 100;
+        
+                        modalImage.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+                        modalImage.style.transform = 'scale(3)'; // Ajusta el nivel de zoom aquí
+                    }
+                });
+        
+                // Restablecer el zoom al salir del contenedor
+                zoomContainer.addEventListener('mouseleave', () => {
+                    if (zoomEnabled) {
+                        modalImage.style.transform = 'scale(1)';
+                        zoomEnabled = false; // Opcional: desactiva el zoom automáticamente al salir
+                        zoomContainer.style.cursor = 'zoom-in';
+                    }
+                });
+            }
+        });
+
+    </script>
+
+{% endblock %}
+

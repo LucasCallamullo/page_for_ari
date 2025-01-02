@@ -1,0 +1,383 @@
+
+
+
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  color: var(--white);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bc-gray);
+  transition: background-color .2s ease-in-out;
+}
+
+main {
+  min-height: 100vh;
+  margin-top: 10%; /* Ajusta este valor según la altura de tu barra de navegación */
+}
+
+
+footer {
+  background-color: var(--bc);
+}
+
+
+:root {
+  /* Primary Colors */
+  --bc: #0c0c0d;
+  --bc-gray: #0d0e10;
+  --bc-purple: #1e2731;
+  --bc-purple-darker: #181c23;
+  --bc-nav-foot: #101317;
+  --section: #0e0e10;
+  --primary: #94c2e3;
+  --secondary: #4888b5;
+
+  /* Colors */
+  --white: #ffffff;
+  --black: #000000;
+  --dark-blue: #1f2029;
+  --extra-dark-blue: #13141a;
+  --red: #da2c4d;
+  --orange: #fd7e14;
+  --yellow: #f8ab37;
+  --warning: #ffc107;
+  --green: #28a745;
+  --light-green: #24e33a;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --light-gray: #ebecf2;
+  --bright-gray: #d9d5de;
+  --gray: #6c757d;
+  --gray-extra-dark: #343a40;
+  --dark: #343a40;
+  /* Minecraft Colors */
+  --m-darkred: #aa0000;
+  --m-red: #ff5555;
+  --m-gold: #ffaa00;
+  --m-yellow: #ffff55;
+  --m-green: #55ff55;
+  --m-darkgreen: #00aa00;
+  --m-darkaqua: #00aaaa;
+  --m-aqua: #55ffff;
+  --m-blue: #94c2e3;
+  --m-darkblue: #0000aa;
+  --m-purple: #aa00aa;
+  --m-pink: #ff55ff;
+  --m-gray: #aaaaaa;
+  --m-darkgray: #555555;
+  /* Gradients */
+  --gradient: linear-gradient(45deg, rgba(148,194,227,1) 0%, rgba(72,136,181,1) 100%);
+  --gradient2: linear-gradient(45deg, rgba(148,194,227,1) 0%, rgba(72,136,181,1) 100%);
+  /* Sizes */
+  --heading: 3.4rem;
+  --heading-medium: 2rem;
+  --paragraph: 1.1rem;
+  --button-large: 1.6rem;
+  --button-small: 1.2rem;
+  --button-smallest: 1rem;
+  /* Fonts */
+  --font-main: 'Montserrat', sans-serif;
+  --font-secondary: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-slim: 'Montserrat', sans-serif;
+}
+
+
+/* Selection */
+::selection {
+  color: var(--white);
+  background: var(--primary);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar-track {
+      background-color: #F5F5F5;
+}
+::-webkit-scrollbar {
+      width: 12px;
+      background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+}
+  
+
+/* Classes */
+
+/* Botón principal */
+.nav-button {
+  margin: 0;
+  padding: 0;
+  width: 2em;
+  height: 1.5em;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .35s cubic-bezier(.175,.685,.32,1.175);
+  cursor: pointer;
+  z-index: 110;
+  background: transparent; /* Fondo transparente */
+  border: none; /* Eliminar borde */
+}
+
+/* Barras del botón */
+.nav-button span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 19px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .35s cubic-bezier(.175,.685,.32,1.175);
+}
+
+/* Posición inicial de las barras */
+.nav-button span:nth-child(1) { top: 0; }
+.nav-button span:nth-child(2), .nav-button span:nth-child(3) { top: 0.75em; }
+.nav-button span:nth-child(4) { top: 1.5em; }
+
+/* Animación cuando está abierto */
+.nav-button.open span:nth-child(1) {
+  top: 2em;
+  width: 0;
+}
+.nav-button.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+.nav-button.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+.nav-button.open span:nth-child(4) {
+  top: 1.5em;
+  width: 0;
+  left: 50%;
+}
+
+/* Estado inicial del menú */
+#menu {
+  display: none; /* Oculto por defecto */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Mostrar menú cuando se active */
+#menu.open {
+  display: grid; /* Cambia según el diseño */
+}
+
+
+/* Transiciones del botón */
+.nav-button.open span {
+  background-color: var(--primary); /* Cambia el color al abrir */
+  transform: rotate(45deg); /* Ejemplo de animación */
+}
+
+/* General Menu Styles */
+.menu-items {
+  margin: 0 .75em;
+  padding: 0 0 2em 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* Centrar los elementos dentro de cada columna */
+  align-items: flex-start;  /* flex-start; Centra los items horizontalmente */
+  justify-content: center;  /* Centra los items verticalmente */
+  width: 100%; /* Asegura que los elementos ocupen el 100% del ancho disponible */
+}
+
+/* Individual Menu Items */
+.menu-item {
+  margin: .45em 0;
+  color: var(--white);
+  font-size: 1.22rem;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+/* Inner Links */
+.menu-item-inner {
+  text-decoration: none;
+  color: var(--white);
+  transition: color .3s;
+}
+
+.menu-item-inner:hover {
+  color: var(--primary);
+}
+
+.menu-item-inner::after {
+  content: '';
+  display: block;
+  width: 0;
+  border-bottom: 2px solid var(--primary);
+  transition: width .3s;
+  position: relative;
+  top: 6px;
+}
+
+.menu-item-inner:hover::after {
+  width: 102%;
+}
+
+/* Active Menu Items */
+.menu-item-inner-active {
+  color: var(--white);
+}
+
+.menu-item-inner-active::after {
+  width: 100%;
+}
+
+/* Asegurarse de que el contenedor no tenga fondo blanco */
+.nav-item {
+  background: transparent;
+}
+
+
+
+
+
+
+
+
+/* ScrollTop */
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: none; /* Inicialmente oculto */
+  z-index: 98;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.back-to-top a {
+  display: block;
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.back-to-top a:hover {
+  transform: scale(1.1);
+}
+
+.back-to-top.visible a {
+  opacity: 1;
+}
+  
+
+
+
+
+/* Footer */
+#footer {
+  width: 100%;
+  min-height: 30vh;
+  padding-top: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer-logo-wrapper {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10vh;
+}
+
+.footer-logo {
+  width: 115px;
+  opacity: 1;
+}
+
+.footer-inner {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-left, .footer-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-left {
+  align-items: center;
+  text-align: center;
+}
+
+.footer-ico {
+  width: 25px;
+  margin-bottom: 1em;
+}
+
+.footer-mail {
+  color: var(--white);
+  font-size: 1.11rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-mail:hover {
+  color: var(--primary);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.5em;
+}
+
+.footer-link {
+  margin: 0 1em;
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+  color: var(--primary);
+}
+
+.footer-text {
+  margin: 1em 0;
+  color: var(--gray);
+  font-size: 0.85em;
+}
+
+.footer-sites {
+  color: var(--gray);
+  font-size: 0.85em;
+}
+
+.footer-sites a {
+  margin: 0 0.5em;
+  color: var(--white);
+  border-bottom: 1px solid var(--white);
+  text-decoration: none;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-sites a:hover {
+  color: var(--primary);
+  border-bottom: 1px solid var(--primary);
+}
+
+

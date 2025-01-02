@@ -1,0 +1,50 @@
+
+
+
+
+
+
+
+<!-- Contenedor que cambiará de contenido 
+<div id="content-container" class="border p-3">
+    Este es el contenido inicial.
+</div> -->
+
+<!-- Contenedor para los comentarios -->
+<div id="comments-container">
+    <!-- Aquí se agregarán los nuevos comentarios -->
+</div>
+
+<!-- Botones que cambiarán el contenido -->
+<button class="custom-btn btn-15" onclick="changeContent()">Más pensamientos de Lucas sobre Ari</button>
+
+{% block extra_scripts %}
+    <script>
+        function changeContent() {
+            // Hacemos la solicitud AJAX al servidor
+            fetch(`/frase_linda/`)
+                .then(response => response.json())  // Esperamos la respuesta en formato JSON
+                .then(data => {
+                    // Creamos un nuevo contenedor para el comentario
+                    var newComment = document.createElement("div");
+                    newComment.classList.add("comment", "border", "p-3", "mb-3");
+
+                    // Insertamos el texto generado dentro del nuevo contenedor
+                    newComment.innerHTML = data.text;
+
+                    // Agregamos el nuevo comentario al contenedor de comentarios
+                    var commentsContainer = document.getElementById("comments-container");
+                    commentsContainer.appendChild(newComment);
+                })
+                .catch(error => {
+                    console.error('Error al hacer la solicitud AJAX:', error);
+                });
+        }
+
+        // Cuando el tab 3 es mostrado
+        document.getElementById('tab3-tab').addEventListener('shown.bs.tab', function() {
+            // Hacemos la solicitud AJAX
+            changeContent()
+        });
+    </script>
+{% endblock %}

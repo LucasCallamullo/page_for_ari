@@ -1,0 +1,155 @@
+
+
+{% extends "home/base.html" %}
+
+{% load static %}
+
+<!-- For More CSS Modules -->
+{% block extra_head %}
+
+    <!-- Cargar CSS o meta tags específicos de la página aquí -->
+    <link href="{% static 'home/css/home.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+<!-- Contenido específico del HEADER de la página -->
+
+
+<!-- =================================================================
+                            Contenido Cambianteee 
+================================================================= -->
+{% block content %}
+
+    
+    
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Columna del calendario -->
+            <div class="col-6 col-md-6 px-2">
+                <div class="calendar-container">
+                    <header>
+                        <div class="day">{{ current_day }}</div>
+                        <div class="month">{{ current_month }} {{ current_year }}</div>
+                    </header>
+            
+                    <table class="calendar">
+                        <thead>
+                            <tr>
+                                <td>Mon</td>
+                                <td>Tue</td>
+                                <td>Wed</td>
+                                <td>Thu</td>
+                                <td>Fri</td>
+                                <td>Sat</td>
+                                <td>Sun</td>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            {% for week in weeks %}
+                            <tr>
+                                {% for day in week %}
+                                <td class="{{ day.class }}">
+                                    {% if day.day %}
+                                        {{ day.day }}
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            
+                    <div class="ring-left"></div>
+                    <div class="ring-right"></div>
+                </div> <!-- end calendar-container -->
+            </div>
+    
+
+            <!-- Columna del botón -->
+            <div class="col-6 col-md-6">
+                
+                <div class="container-fluid mt-5">
+                    <h2 id="headline" class="mb-3"><strong>Countdown to see you again</strong></h2>
+                    <div id="countdown">
+                        <ul>
+                            <li><span id="days"></span><span class="label">Days</span></li>
+                            <li><span id="hours"></span><span class="label">Hours</span></li>
+                            <li><span id="minutes"></span><span class="label">Minutes</span></li>
+                            <li><span id="seconds"></span><span class="label">Seconds</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr>
+                
+                <!-- TIMER ARI -->
+                <div class="container-ari mt-3">
+
+                    <h2 id="headline_ari" class="mt-10"><strong>Feliz Cumplee Ari</strong></h2>
+
+                    <div class="balloon white">
+                        <div class="star-red"></div>
+                        <div class="face">
+                            <div class="eye"></div>
+                            <div class="mouth happy"></div>
+                        </div>
+                        <div class="triangle"></div>
+                        <div class="string"></div>
+                    </div>
+            
+                    <div class="balloon red">
+                        <div class="star"></div>
+                        <div class="face">
+                            <div class="eye"></div>
+                            <div class="mouth happy"></div>
+                        </div>
+                        <div class="triangle"></div>
+                        <div class="string"></div>
+                    </div>
+            
+                    <div class="balloon blue">
+                        <div class="star"></div>
+                        <div class="face">
+                            <div class="eye"></div>
+                            <div class="mouth happy"></div>
+                        </div>
+                        <div class="triangle"></div>
+                        <div class="string"></div>
+                    </div>
+                    
+                    <div id="cumple_ari">
+                        <ul>
+                            <li class="days"><span id="days_ari"></span><span>Days</span></li>
+                            <li class="hours"><span id="hours_ari"></span><span>Hours</span></li>
+                            <li class="minutes"><span id="minutes_ari"></span><span>Minutes</span></li>
+                            <li class="seconds"><span id="seconds_ari"></span><span>Seconds</span></li>
+                        </ul>
+                    </div>
+
+
+                    <div id="content-ari" class="emoji">
+                        <span>🥳</span>
+                        <span>🎉</span>
+                        <span>🎂</span>
+                    </div>
+
+                    <button id="btn-ari" class="custom-btn btn-6" 
+                    onclick="window.location.href='{% url 'Flores' %}';">
+                        <span>Regaloo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+<!-- ==================================================================
+#                  Mis Scripts personalizados
+===================================================================== -->
+{% block extra_scripts %}
+    <script src="{% static 'home/js/home.js' %}"></script>
+{% endblock %}
