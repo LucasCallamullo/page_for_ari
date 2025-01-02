@@ -153,8 +153,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'shared_static')
 ]
 
-STATIC_URL = '/static/'
-
 # Ruta para archivos estáticos en producción (por ejemplo, en Railway)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
