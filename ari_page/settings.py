@@ -164,4 +164,5 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Permite todos los dominios (en producción, puedes especificar solo el dominio de Railway)
-ALLOWED_HOSTS = ['*']  
+ALLOWED_HOSTS = ['localhost', 'web-production-8df2.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-8df2.up.railway.app', 'http://localhost']
