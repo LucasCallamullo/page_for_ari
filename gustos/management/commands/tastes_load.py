@@ -36,6 +36,7 @@ class Command(BaseCommand):
             category = row.get('category')
             notes = row.get('Notes')
             user_email = row.get('user')
+            image_url = row.get('image_url')
 
             if not all([name, likes, category, user_email]):
                 self.stdout.write(self.style.WARNING(f'Datos incompletos en la fila {index + 1}. Saltando...'))
@@ -51,7 +52,13 @@ class Command(BaseCommand):
             category_obj, _ = CategoryFood.objects.get_or_create(name=category)
 
             # Buscar o crear comida
-            food, _ = Food.objects.get_or_create(name=name, category=category_obj)
+            food, created = Food.objects.get_or_create(name=name, category=category_obj)
+            
+            # created bool, return True si se creo, return False si ya existia
+            if not created:
+                # Si el objeto ya existía, actualizamos el atributo 'image_url'
+                food.image_url = image_url
+                food.save()  # Guardamos los cambios en la base de datos
 
             # Buscar tipo de gusto
             type_fav = TypeFav.objects.filter(id=likes).first()

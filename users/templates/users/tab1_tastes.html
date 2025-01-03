@@ -7,7 +7,7 @@
         <!-- Sidebar -->
         <div class="col-3 col-md-3 sidebar">
 
-            <a href="{% url 'Home' %}" class="px-2 sidebar-link">
+            <a href="#" class="px-2 sidebar-link">
                 <i class="fas fa-plus-circle"></i>
                 <strong>Create Post</strong>
             </a>
@@ -18,7 +18,7 @@
             </a>
 
 
-            <a href="#" class="px-2 sidebar-link">
+            <a href="{% url 'filter_by_likes' %}" class="px-2 sidebar-link">
                 <i class="fas fa-heart"></i>
                 <strong>Likes</strong>
             </a>
@@ -32,11 +32,11 @@
 
             <!-- Lista Categoriass -->
             {% if categories %}
-                <h6 class="px-3 mt-3">Categoria:</h6>
+                <h6 class="px-3 mt-3"><strong>Categoria: </strong></h6>
                 <ul class="category-list">
                     {% for category in categories %}
                         <li class="px-5">
-                            <a href="{% url 'Home' %}">{{ category.name }}</a>
+                            <a href="{% url 'filter_food_category' category.id %}">{{ category.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -49,8 +49,64 @@
         </div>
 
         <!-- Main Content -->
-        <div class="col-md-9">
+        <div class="col-9 col-md-9 px-4">
+            
+            {% for favorite in user_favorites %}
 
+                <div class="projcard d-flex align-items-center">
+                    <img class="projcard-img" src="{{ favorite.food.image_url }}" alt="Food Image">
+                    
+                    <div class="projcard-textbox">
+                        <h5 class="projcard-title">{{ favorite.food.name }}</h5>
+                        
+                        
+                        {% if favorite.type_favs.id == 1 %}
+                            <strong class="projcard-subtitle red">{{ favorite.type_favs.name }}</strong>
+                            <div class="projcard-bar projcard-bar-red"> </div>
+
+                        {% elif favorite.type_favs.id == 2 %}
+                            <strong class="projcard-subtitle yellow">{{ favorite.type_favs.name }}</strong>
+                            <div class="projcard-bar projcard-bar-yellow"></div>
+
+                        {% elif favorite.type_favs.id == 3 %}
+                            <strong class="projcard-subtitle green">{{ favorite.type_favs.name }}</strong>
+                            <div class="projcard-bar projcard-bar-green"></div>
+
+                        {% endif %} 
+                        
+
+                        {% if favorite.note and favorite.note != 'nan' %}
+                            <p class="projcard-description">
+                                {{ favorite.note }} .
+                            </p>
+                        {% endif %}
+
+
+                        <div class="star-container">
+                            {% for i in "0123456789"|slice:":5" %}
+                                {% if forloop.counter <= favorite.stars %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                </div>
+
+            {% empty %}
+
+                <p>No tienes gustos registrados.</p>
+
+            {% endfor %}
+        
+
+
+                
+
+              
+                
         </div>
 
     </div>
@@ -67,8 +123,3 @@
 
 
 
-{% for favorite in user_favorites %}
-    <p>{{ favorite.food.name }} - {{ favorite.type_favs.name }} - {{ favorite.stars }} estrellas</p>
-{% empty %}
-    <p>No tienes gustos registrados.</p>
-{% endfor %}

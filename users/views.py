@@ -5,10 +5,51 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from gustos.models import Favorites
-from productos.models import CategoryFood
+from productos.models import CategoryFood, Food
 
 # Create your views here.
 from django.shortcuts import render
+
+
+
+def filter_by_likes(request):
+    # Filtrar los gustos por correo electrónico del usuario y el tipo de favorito con id=3
+    user_favorites = Favorites.objects.filter(user__email='ari@gmail.com', type_favs__id=3)
+    
+    # Obtener las categorías únicas relacionadas con los gustos del usuario
+    categories = CategoryFood.objects.filter(foods__in=user_favorites.values_list('food', flat=True)).distinct()
+    
+    # Aquí puedes pasar 'user_favorites' al contexto si lo necesitas
+    context = {
+        'user_favorites': user_favorites,
+        'categories': categories,
+    }
+    
+    return render(request, "users/profile.html", context)
+
+
+def filter_food_category(request, category_id):
+    
+    # Filtrar los gustos por correo electrónico del usuario
+    user_favorites = Favorites.objects.filter(user__email='ari@gmail.com')
+
+    # Obtener las categorías únicas relacionadas con los gustos del usuario
+    categories = CategoryFood.objects.filter(foods__in=user_favorites.values_list('food', flat=True)).distinct()
+
+    category = CategoryFood.objects.get(id=category_id)
+    
+    foods_in_category = Food.objects.filter(category=category)
+    
+    user_favorites = user_favorites.filter(food__in=foods_in_category)
+    
+    
+    context = {
+            'user_favorites': user_favorites,
+            'categories': categories,
+            'category': category
+        }
+    
+    return render(request, "users/profile.html", context)
 
 
 def profile_view(request):
