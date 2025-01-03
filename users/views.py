@@ -4,10 +4,27 @@ import random
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from gustos.models import Favorites
+from productos.models import CategoryFood
 
 # Create your views here.
+from django.shortcuts import render
+
+
 def profile_view(request):
-    return render(request, "users/profile.html")
+    # Filtrar los gustos por correo electrónico del usuario
+    user_favorites = Favorites.objects.filter(user__email='ari@gmail.com')
+
+    # Obtener todas las categorías únicas relacionadas con los gustos del usuario
+    categories = CategoryFood.objects.filter(foods__in=user_favorites.values_list('food', flat=True)).distinct()
+
+    context = {
+        'user_favorites': user_favorites,
+        'categories': categories
+    }
+    
+    return render(request, "users/profile.html", context)
+
 
 
 
@@ -16,18 +33,14 @@ def frase_linda(request):
     
     # Lista extensa de palabras afirmativas y lindas (ordenada alfabéticamente)
     palabras_afirmativas = [
-        "adorable", "afable", "agradable", "alegre", "amorosa", "angelical", 
-        "apasionada", "auténtica", "bella", "bondadosa", "bonita", 
-        "brillante", "carismática", "cariñosa", "chispeante", "clara", 
-        "coqueta", "confidente", "creativa", "delicada", "divina", 
-        "dulce", "encantadora", "espléndida", "espectacular", 
-        "extraordinaria", "fabulosa", "formidable", "fresca", "generosa", 
-        "glamorosa", "graciosa", "hermosa", "hipnotizante", "increíble", 
-        "inspiradora", "inteligente", "linda", "magnífica", "maravillosa", 
-        "mágica", "mía", "noble", "optimista", "perfecta", 
-        "positiva", "preciosa", "radiante", "resplandeciente", "romántica", 
-        "sabia", "sensacional", "sorprendente", "tierna", "única", 
-        "valiente", "valiosa", "virtuosa", 
+        "adorable", "agradable", "alegre", "amorosa", "angelical", 
+        "apasionada", "auténtica", "bella", "bonita", "brillante", 
+        "carismática", "cariñosa", "coqueta", "confidente", "creativa", 
+        "delicada", "divina", "dulce", "encantadora", "espectacular", 
+        "extraordinaria", "fabulosa", "generosa", "graciosa", "hermosa", 
+        "hipnotizante", "increíble", "inspiradora", "inteligente", 
+        "linda", "mía", "perfecta", "positiva", "preciosa", "romántica", 
+        "sabia", "sorprendente", "tierna", "única", "valiente", "valiosa", 
         "tenes una voz hermosa", "tenes unas tetas hermosas", "tenes unos ojitos hermosos", 
         "tenes un pelo hermoso", "tenes un orto hermoso"
     ]

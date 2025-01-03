@@ -1,5 +1,74 @@
 
 
 
-<h3>Content for Tab 1</h3>
-<p>This is where you will replace content for Tab 1.</p>
+<div class="container-fluid">
+
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-3 col-md-3 sidebar">
+
+            <a href="{% url 'Home' %}" class="px-2 sidebar-link">
+                <i class="fas fa-plus-circle"></i>
+                <strong>Create Post</strong>
+            </a>
+
+            <a href="#" class="px-2 sidebar-link">
+                <i class="fas fa-blog"></i>
+                <strong>Blogs</strong>
+            </a>
+
+
+            <a href="#" class="px-2 sidebar-link">
+                <i class="fas fa-heart"></i>
+                <strong>Likes</strong>
+            </a>
+
+            <a href="#" class="px-2 sidebar-link">
+                <i class="fas fa-bookmark"></i>
+                <strong>Saves</strong>
+            </a>
+
+            <hr>
+
+            <!-- Lista Categoriass -->
+            {% if categories %}
+                <h6 class="px-3 mt-3">Categoria:</h6>
+                <ul class="category-list">
+                    {% for category in categories %}
+                        <li class="px-5">
+                            <a href="{% url 'Home' %}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% else %}
+                <h6 class="px-2 mt-3">No categories available.</h6>
+            {% endif %}
+
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% for favorite in user_favorites %}
+    <p>{{ favorite.food.name }} - {{ favorite.type_favs.name }} - {{ favorite.stars }} estrellas</p>
+{% empty %}
+    <p>No tienes gustos registrados.</p>
+{% endfor %}
